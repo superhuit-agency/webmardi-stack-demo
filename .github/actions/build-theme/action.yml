@@ -1,0 +1,30 @@
+name: 'Build WP theme'
+runs:
+  using: 'composite'
+  steps:
+    - name: Install node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install node dependencies
+      shell: bash
+      run: |
+        yarn install --frozen-lockfile
+        yarn install:wp --frozen-lockfile
+
+    - name: Build assets
+      shell: bash
+      run: yarn build
+      working-directory: ./wordpress
+
+    # - name: Execute script to update translation file
+    #   shell: bash
+    #   run: sh ./.github/actions/build-theme/update-wp-translation-files.sh
+
+    - name: Save built artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: wp-theme-assets
+        path: |
+          ./wordpress/theme/static

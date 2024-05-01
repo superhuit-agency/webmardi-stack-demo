@@ -1,0 +1,92 @@
+.app {
+	position: relative;
+	min-height: 100vh;
+	background-color: $color-brand-1-lighter;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url('../../assets/images/background.png');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: top center;
+		mix-blend-mode: color-burn;
+		z-index: 0;
+	}
+
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+	/* &.-is-loading {
+		visibility: hidden;
+		pointer-events: none;
+	} */
+
+	sub,
+	sup {
+		font-size: smaller;
+	}
+	sub {
+		vertical-align: sub;
+	}
+	sup {
+		vertical-align: super;
+	}
+
+	/***** LINKS *****/
+	.supt-introduction,
+	.supt-paragraph,
+	.supt-list,
+	.supt-section__introduction,
+	.supt-table {
+		a {
+			@extend %link-underline;
+		}
+	}
+}
+
+/* CUSTOM :: SECTION GIFTS */
+.supt-section-gifts {
+	padding: 50px 0 80px;
+
+	&__inner {
+		@extend %grid;
+		grid-row-gap: 32px;
+
+		> div {
+			grid-column: 1 / span 12;
+		}
+
+		> div:first-child {
+			@extend %grid-no-margin;
+
+			h2 {
+				@extend %t-h2;
+				color: $color-neutral-000;
+				grid-column: 1 / span 5;
+			}
+			p {
+				@extend %t-paragraph;
+				color: $color-neutral-000;
+			}
+
+			> div {
+				grid-column: 7 / span 6;
+			}
+
+			.supt-list {
+				margin: 24px 0 0;
+			}
+		}
+
+		> div:nth-child(2) {
+			@extend %grid-no-margin;
+		}
+	}
+
+	.supt-card-gift {
+		grid-column: span 4;
+	}
+}

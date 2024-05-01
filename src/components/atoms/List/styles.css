@@ -1,0 +1,104 @@
+@import '@resources/index.css';
+
+.supt-list {
+	@extend %t-paragraph;
+
+	display: grid;
+	grid-template-columns: 1fr; /* 1fr 1fr */
+	row-gap: 20px;
+	/* padding: 40px 0; */
+	padding: 0 0 24px;
+	/* border-top: 1px solid rgba(255 255 255 / 15%); */
+	border-bottom: 1px solid rgba(255 255 255 / 15%);
+
+	list-style: none;
+	counter-reset: listCounter;
+
+	li {
+		@extend %t-paragraph;
+		color: $color-neutral-000;
+		font-weight: 500;
+		counter-increment: listCounter;
+
+		display: flex;
+		align-items: center;
+
+		&::before {
+			content: counter(listCounter);
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-right: 18px;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+
+			background-color: $color-brand-1-base;
+			color: $color-neutral-000;
+
+			font-family: var(--font-primary);
+			font-size: 13px;
+			font-weight: 500;
+		}
+	}
+
+	ol&,
+	ol {
+		counter-reset: li;
+
+		> li {
+			counter-increment: li;
+
+			&::before {
+				top: 0;
+				font-weight: bold;
+			}
+		}
+	}
+
+	ol& {
+		> li {
+			padding-left: 1.3em;
+
+			&::before {
+				content: counter(li) '.';
+
+				color: $color-brand-1-base;
+			}
+		}
+	}
+
+	/* Child Lists */
+	ul,
+	ol {
+		list-style: none;
+		padding: 0px;
+	}
+
+	/* Child Ordered List - letter bullet */
+	ol {
+		> li::before {
+			content: counter(li, lower-alpha) '.';
+			color: $color-brand-1-lighter;
+		}
+	}
+
+	/* Child Unordered List - gray triangle */
+	ul {
+		> li::before {
+			background-color: $color-brand-1-lighter;
+		}
+	}
+
+	/* MODIFIERS */
+	&[reversed] {
+		ol& {
+			> li {
+				&::before {
+					counter-increment: li -1;
+				}
+			}
+		}
+	}
+}
