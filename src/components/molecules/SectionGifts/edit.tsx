@@ -14,6 +14,8 @@ import { SectionGifts, SectionGiftsProps } from '.';
 // styles
 import './styles.css';
 import './styles.edit.css';
+import { InspectorControls } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
 
 /**
  * COMPONENT EDITOR
@@ -24,7 +26,19 @@ const Edit = (props: WpBlockEditProps<SectionGiftsProps>) => {
 	const variables = useMemo(() => ({ queryVars }), [queryVars]);
 	const { isLoading, data } = useGraphQlApi(getData, variables);
 
-	return <SectionGifts />;
+	return (
+		<>
+			<InspectorControls>
+				<TextControl
+					value={props.attributes.title}
+					onChange={(title: string) => props.setAttributes({ title })}
+					label={_x('Title', 'SectionGifts block', 'supt')}
+				/>
+			</InspectorControls>
+
+			<SectionGifts title={props.attributes.title} />
+		</>
+	);
 };
 
 /**
@@ -47,6 +61,10 @@ export const SectionGiftsBlock: WpBlockType<SectionGiftsProps> = {
 			queryVars: {
 				type: 'object',
 				default: {},
+			},
+			title: {
+				type: 'string',
+				default: '',
 			},
 		},
 		example: {

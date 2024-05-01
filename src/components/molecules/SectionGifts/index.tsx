@@ -9,6 +9,7 @@ import './styles.css';
  * TYPINGS
  */
 export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
+	title: string;
 	data?: any;
 	queryVars?: any;
 }
@@ -17,13 +18,14 @@ export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
  * COMPONENT
  */
 export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
+	title,
 	data, // Dynamically fetched props by GraphQL query
 }) => {
 	return (
 		<div className="supt-section-gifts">
 			<div className="supt-section-gifts__inner">
 				<div>
-					<h2>You’re stranded on a desert island</h2>
+					<h2>{title}</h2>
 					<div>
 						<p>What do you wish you had brought with you?</p>
 					</div>
