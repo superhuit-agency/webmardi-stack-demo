@@ -14,6 +14,7 @@ import { SectionGiftsProps } from '.';
 // styles
 import './styles.css';
 import './styles.edit.css';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { InspectorControls } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
 import { RichText } from '@wordpress/block-editor';
@@ -50,6 +51,15 @@ const Edit = (props: WpBlockEditProps<SectionGiftsProps>) => {
 								placeholder="Description..."
 								tagName="p"
 							/>
+
+							<div>
+								<InnerBlocks
+									allowedBlocks={[
+										'core/paragraph',
+										'core/list',
+									]}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -99,6 +109,6 @@ export const SectionGiftsBlock: WpBlockType<SectionGiftsProps> = {
 			},
 		},
 		edit: Edit,
-		save: () => null,
+		save: () => <InnerBlocks.Content />,
 	},
 };

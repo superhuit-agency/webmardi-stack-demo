@@ -1,4 +1,4 @@
-import { FC, HTMLProps } from 'react';
+import { FC, HTMLProps, ReactNode } from 'react';
 // internal imports
 import { BlockConfigs } from '@/typings';
 import block from './block.json';
@@ -11,6 +11,7 @@ import './styles.css';
 export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
 	title: string;
 	description: string;
+	children?: ReactNode;
 	data?: any;
 	queryVars?: any;
 }
@@ -21,6 +22,7 @@ export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
 export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
 	title,
 	description,
+	children,
 	data, // Dynamically fetched props by GraphQL query
 }) => {
 	return (
@@ -30,6 +32,7 @@ export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
 					<h2>{title}</h2>
 					<div>
 						<p>{description}</p>
+						<div>{children}</div>
 					</div>
 				</div>
 			</div>
