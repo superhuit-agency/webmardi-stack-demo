@@ -10,6 +10,7 @@ import './styles.css';
  */
 export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
 	title: string;
+	description: string;
 	data?: any;
 	queryVars?: any;
 }
@@ -19,6 +20,7 @@ export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
  */
 export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
 	title,
+	description,
 	data, // Dynamically fetched props by GraphQL query
 }) => {
 	return (
@@ -27,7 +29,7 @@ export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
 				<div>
 					<h2>{title}</h2>
 					<div>
-						<p>What do you wish you had brought with you?</p>
+						<p>{description}</p>
 					</div>
 				</div>
 			</div>
