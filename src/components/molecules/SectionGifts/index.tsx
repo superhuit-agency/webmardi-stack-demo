@@ -1,6 +1,7 @@
 import { FC, HTMLProps, ReactNode } from 'react';
 // internal imports
 import { BlockConfigs } from '@/typings';
+import { CardGift } from '../cards/CardGift';
 import block from './block.json';
 // styles
 import './styles.css';
@@ -12,7 +13,7 @@ export interface SectionGiftsProps extends HTMLProps<HTMLDivElement> {
 	title: string;
 	description: string;
 	children?: ReactNode;
-	data?: any;
+	gifts?: any;
 	queryVars?: any;
 }
 
@@ -23,7 +24,7 @@ export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
 	title,
 	description,
 	children,
-	data, // Dynamically fetched props by GraphQL query
+	gifts, // Dynamically fetched props by GraphQL query
 }) => {
 	return (
 		<div className="supt-section-gifts">
@@ -35,12 +36,25 @@ export const SectionGifts: FC<SectionGiftsProps> & BlockConfigs = ({
 						<div>{children}</div>
 					</div>
 				</div>
-			</div>
 
-			{/* <div>
-				<h2>Dynamic data fetching</h2>
-				<pre>{JSON.stringify(data, null, 2)}</pre>
-			</div> */}
+				<div>
+					{gifts?.nodes.map((gift: any) => (
+						<CardGift
+							key={gift.id}
+							title={gift.title}
+							image={{
+								src: gift.featuredImage.node.sourceUrl,
+								width: gift.featuredImage.node.mediaDetails
+									.width,
+								height: gift.featuredImage.node.mediaDetails
+									.height,
+								alt: gift.title,
+							}}
+							category={gift.giftCategories.nodes[0].name}
+						/>
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

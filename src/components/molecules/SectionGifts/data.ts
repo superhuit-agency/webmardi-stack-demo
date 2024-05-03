@@ -35,11 +35,24 @@ export const getData = async (
 	// declare the GraphQL query string.
 	const query = gql`
 		query sectionGiftsQuery {
-			data: posts {
+			gifts {
 				nodes {
 					id: databaseId
 					title(format: RENDERED)
-					uri
+					featuredImage {
+						node {
+							sourceUrl
+							mediaDetails {
+								width
+								height
+							}
+						}
+					}
+					giftCategories {
+						nodes {
+							name
+						}
+					}
 				}
 			}
 		}
