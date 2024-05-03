@@ -35,7 +35,7 @@ export const getData = async (
 	// declare the GraphQL query string.
 	const query = gql`
 		query sectionGiftsQuery {
-			gifts {
+			gifts(where: { giftCategoryIn: [5] }) {
 				nodes {
 					id: databaseId
 					title(format: RENDERED)
