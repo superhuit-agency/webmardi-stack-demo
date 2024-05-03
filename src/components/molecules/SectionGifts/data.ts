@@ -34,8 +34,8 @@ export const getData = async (
 ): Promise<any> => {
 	// declare the GraphQL query string.
 	const query = gql`
-		query sectionGiftsQuery {
-			gifts(where: { giftCategoryIn: [5] }) {
+		query sectionGiftsQuery($categoryIn: [ID]) {
+			gifts(where: { giftCategoryIn: $categoryIn }) {
 				nodes {
 					id: databaseId
 					title(format: RENDERED)
@@ -59,7 +59,7 @@ export const getData = async (
 	`;
 
 	// construct the query variables (maybe based on the `attributes` argument)
-	const variables = {};
+	const variables = attributes?.queryVars || {};
 
 	// retrieves the data
 	const data = await fetcher(query, { variables });

@@ -19,6 +19,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
 import { InspectorControls } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
 import { RichText } from '@wordpress/block-editor';
+import { TermsSelectControl } from '#/components';
 
 /**
  * COMPONENT EDITOR
@@ -36,6 +37,17 @@ const Edit = (props: WpBlockEditProps<SectionGiftsProps>) => {
 					value={props.attributes.title}
 					onChange={(title: string) => props.setAttributes({ title })}
 					label={_x('Title', 'SectionGifts block', 'supt')}
+				/>
+
+				<TermsSelectControl
+					label="Category"
+					taxonomy="gift_category"
+					onChange={(categoryIn) =>
+						props.setAttributes({
+							queryVars: { ...queryVars, categoryIn },
+						})
+					}
+					values={queryVars.categoryIn || []}
 				/>
 			</InspectorControls>
 
