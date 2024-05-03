@@ -7,6 +7,7 @@ import { useGraphQlApi } from '#/hooks';
 import { getData } from './data';
 
 // block
+import { CardGift } from '../cards/CardGift';
 import { WpBlockEditProps, WpBlockType } from '@/typings';
 import block from './block.json';
 import { SectionGiftsProps } from '.';
@@ -62,12 +63,25 @@ const Edit = (props: WpBlockEditProps<SectionGiftsProps>) => {
 							</div>
 						</div>
 					</div>
-				</div>
 
-				{/* <div>
-				<h2>Dynamic data fetching</h2>
-				<pre>{JSON.stringify(data, null, 2)}</pre>
-			</div> */}
+					<div>
+						{data?.gifts?.nodes.map((gift: any) => (
+							<CardGift
+								key={gift.id}
+								title={gift.title}
+								image={{
+									src: gift.featuredImage.node.sourceUrl,
+									width: gift.featuredImage.node.mediaDetails
+										.width,
+									height: gift.featuredImage.node.mediaDetails
+										.height,
+									alt: gift.title,
+								}}
+								category={gift.giftCategories.nodes[0].name}
+							/>
+						))}
+					</div>
+				</div>
 			</div>
 		</>
 	);
