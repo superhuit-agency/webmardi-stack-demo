@@ -1,8 +1,6 @@
-# Next.js / Wordpress Starter
+# Superstack - Webmardi Demo
 
 An opinionated boilerplate for decoupled (headless) websites that are both performant (Next.js) and easy to edit (WordPress with Gutenberg block editor).
-
-TODO: explain what's different (main concepts).
 
 ## Features
 
@@ -84,6 +82,8 @@ Open [http://localhost:4000](http://localhost:4000) with your browser to access 
 -   [Deploy](./docs/setup/deployement.md)
 
 ## 🛠 Create a block
+
+> Follow [this step by step guide](./docs/create-block-step-by-step.md) to create a block like we did during the Webmardi demo.
 
 -   [How to create blocks](./docs/create-blocks/create-blocks.md)
 -   [How to make a block editable](./docs/create-blocks/make-block-editable.md)
